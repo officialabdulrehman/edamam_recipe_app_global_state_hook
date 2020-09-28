@@ -1,0 +1,83 @@
+.cards {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  width: 100%;
+  margin-top: 10px;
+}
+
+.card {
+  border-radius: 5px;
+  margin: 20px 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  background-color: #263238;
+  color: white;
+  align-items: center;
+  width: 350px;
+  height: 600px;
+  cursor: default;
+}
+
+
+.card_heading{
+  height: 10%;
+  width: 90%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.5rem;
+  color: lightcoral;
+}
+.card_mid{
+  height: 40%;
+  display: flex;
+  cursor: pointer;
+}
+
+.card_foot{
+  height: 40%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  overflow: hidden;
+  width: 85%;
+  text-align: left;
+}
+
+.card_foot > h4{
+  margin: 10px 0 5px 0;
+  color: lightcoral;
+}
+
+.card_foot > p {
+  font-size: 0.8rem;
+  margin: 1.5px;
+}
+
+span{
+  font-weight: 600;
+  color: lightcoral;
+}
+
+.footer1 {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  height: 10%;
+  text-align: right;
+  width: 85%;
+}
+.seemore{
+  color: lightcoral;
+  cursor: pointer;
+  padding: 5px;
+}
+.bookmark{
+  cursor: pointer;
+  justify-self: flex-start;
+}

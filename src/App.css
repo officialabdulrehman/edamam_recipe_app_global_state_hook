@@ -1,0 +1,38 @@
+.App {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 80%;
+  margin: auto;
+}
+
+header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+header > h1 {
+  color: coral;
+  cursor: default; 
+}
+a{
+  text-decoration: none;
+  border: 1px solid lightcoral ;
+  color: coral;
+  padding: 5px 10px;
+  border-radius: 3px;
+  font-size: 1.1rem;
+  cursor: pointer;
+}
+.bookmark{
+  cursor: pointer;
+}
+.bookmark:hover{
+  fill:#f08080;
+  color: #f08080;
+}
