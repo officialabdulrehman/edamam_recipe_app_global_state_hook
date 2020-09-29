@@ -33,8 +33,8 @@ export const Card = () => {
             </div>
             <div className="card_foot">
               <h4>Ingredients:</h4>
-              {recipe.recipe.ingredientLines.map((ing, index) => {
-                if (index === 6)
+              {/* {recipe.recipe.ingredientLines.map((ing, index) => {
+                if (index === 6 )
                   return (
                     <p key={index} className="seemore" onClick={() => dispatch("SET_CARDDETAIL", recipe)}>
                       ...see more
@@ -46,7 +46,18 @@ export const Card = () => {
                     <span>{index}.</span> {ing.substring(0, 42)}{ing.substring(43) && <span className='dots'>...</span>}
                   </p>
                 );
+              })} */}
+              {recipe.recipe.ingredientLines.map((ing, index) => {
+                if (index > 5) return null;
+                return (
+                  <p key={index}>
+                    <span>{index}.</span> {ing.substring(0, 42)}{ing.substring(43) && <span className='dots'>...</span>}
+                  </p>
+                );
               })}
+              <p key={index} className="seemore" onClick={() => dispatch("SET_CARDDETAIL", recipe)}>
+                      ...see details
+                    </p>
             </div>
             <div className="footer1">
               <div className="bookmark">

@@ -87,7 +87,7 @@ const App = (props) => {
 export default App;
 
 /*
-1. Add bookmark icon (DONE), functionality, localstorage
+1. Add bookmark icon ( DONE ), functionality ( DONE ), localstorage
 2. Create a modal/componant/page for detailed recipe (DONE)
 3. Add custom search options for categories
 4. Ingredients details like carbs/sugar/sodium
