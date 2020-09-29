@@ -60,6 +60,7 @@ const configureStore = () => {
     CLEAR_SEARCH: (curState) => {
       let newState = {...curState}
       newState.search = []
+      newState.cardDetail = null
       return newState
     },
     CLEAR_RECIPES: (curState) => {
@@ -79,7 +80,7 @@ const configureStore = () => {
     },
     CLEAR_CARDDETAIL: (curState) => {
       let newState = {...curState}
-      curState.cardDetail = null
+      newState.cardDetail = null
       return newState
     }
   }

@@ -25,7 +25,7 @@ export const BookmarkedCards = () => {
                 <div className="card_heading">
                   <h1>{recipe.recipe.label}</h1>
                   <h2>
-                    {recipe.recipe.totalTime === "0"
+                    {recipe.recipe.totalTime === 0
                       ? "N/A"
                       : recipe.recipe.totalTime + " min"}
                   </h2>
@@ -41,14 +41,14 @@ export const BookmarkedCards = () => {
                   {recipe.recipe.ingredientLines.map((ing, index) => {
                     if (index === 6)
                       return (
-                        <p key={index} className="seemore">
+                        <p key={index} className="seemore" onClick={() => dispatch("SET_CARDDETAIL", recipe)}>
                           ...see more
                         </p>
                       );
                     else if (index > 6) return null;
                     return (
                       <p key={index}>
-                        <span>{index}.</span> {ing}
+                        <span>{index}.</span> {ing.substring(0, 42)}{ing.substring(43) && <span className='dots'>...</span>}
                       </p>
                     );
                   })}

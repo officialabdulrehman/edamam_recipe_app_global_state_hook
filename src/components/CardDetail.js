@@ -44,7 +44,7 @@ export default function CardDetail() {
           />
         </div>
         <div className="cardDetail_foot">
-          <h4>
+          <h4 style={{marginTop: '20px'}}>
             Source:{"   "}
             <span>{state.cardDetail.recipe.source}</span>
           </h4>
