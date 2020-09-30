@@ -33,8 +33,8 @@ const configureStore = () => {
       };
       const newState = {...curState}
       newState.recipes = updatedRecipes
-      return newState
-      //return { recipes: curState.recipes}
+      //return newState
+      return { recipes: newState.recipes}
     },
     SET_RECIPES: (curState, recipes) => {
       console.log(curState, ' ', recipes)
@@ -43,8 +43,8 @@ const configureStore = () => {
       const newState = {...curState}
       newState.recipes = newRecipes
       //return{newState}
-      //return{ recipes: curState.recipes}
-      return newState
+      return{ recipes: newState.recipes}
+      //return newState
     },
     SET_SEARCH: (curState, search) => {
       let newSearch = curState.search

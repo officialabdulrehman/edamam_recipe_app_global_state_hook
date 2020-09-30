@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 
 import { useStore } from './hooks-store/store';
 
-import Card from "./components/Card";
+import Cards from "./components/Cards";
 import BookmarkedCards from './components/BookmarkedCards';
 import axios from "axios";
 import "./App.css";
@@ -14,7 +14,6 @@ const App = (props) => {
   const APP_ID = "6f96d73b";
   const APP_KEY = "3c2c1eb0abefd19d7eee57e862a1cbf0";
 
-  const [query, setQuery] = useState("");
   const [state, dispatch] = useStore()
 
   useEffect(() => {
@@ -36,17 +35,6 @@ const App = (props) => {
     const data = await response.data.hits
     dispatch('SET_RECIPES', data)
   }
-
-  const onChangeHandler = (event) => {
-    setQuery(event.target.value);
-  };
-
-  const onSubmitHandler = (event) => {
-    event.preventDefault();
-    dispatch('SET_SEARCH', query)
-    dispatch('SET_SHOWBOOKMARK', false)
-    setQuery('')
-  };
 
   const toggleBookmarks = () => {
     dispatch('SET_SHOWBOOKMARK', !state.showBookmark)
@@ -70,15 +58,11 @@ const App = (props) => {
           edamam api
         </a>
       </header>
-      <InputForm
-        onSubmitHandler={onSubmitHandler}
-        onChangeHandler={onChangeHandler}
-        query={query}
-      />
+      <InputForm/>
       {state.showBookmark ? (
         <BookmarkedCards />
       ) : (
-        <Card />
+        <Cards />
       )}
     </div>
   );

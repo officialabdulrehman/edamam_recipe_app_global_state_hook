@@ -4,12 +4,15 @@ import { useStore } from '../hooks-store/store';
 import { ReactComponent as BookmarkEmpty } from "../svg/bookmarkEmpty.svg";
 import { ReactComponent as BookmarkFilled } from "../svg/bookmarkFilled.svg";
 import "./CardDetail.css";
+import { motion } from 'framer-motion'
 
 export default function CardDetail() {
   const [state, dispatch] = useStore()
   const cardIndex = state.recipes.findIndex(r => r.recipe.label === state.cardDetail.recipe.label)
   return (
-    <div className="cardDetailOuter">
+    <motion.div className="cardDetailOuter" initial={{ opacity: 0 }}
+    animate={{ opacity: 1 }}
+    transition={{ duration: 1 }}>
       <div className="cardInnerLeft orderTop">
         <div className="healthLabels">
           <h2>Health Labels: </h2>
@@ -116,6 +119,6 @@ export default function CardDetail() {
           ))}
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }
