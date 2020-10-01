@@ -1,0 +1,38 @@
+.advButtons{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  height: 55px;
+  width: 100%;
+  color: white;
+}
+.advSearch{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 40px;
+
+}
+.expand{
+  fill: lightcoral;
+  cursor: pointer;
+}
+.compress{
+  fill: lightcoral;
+  cursor: pointer;
+}
+.expand:hover{
+  fill: coral;
+}
+.compress:hover{
+  fill: coral;
+}
+.lr{
+  fill: lightcoral;
+}
+.lr:hover{
+  fill: coral;
+  cursor: pointer;
+}

@@ -9,6 +9,7 @@ import "./App.css";
 import InputForm from "./components/InputForm";
 import { ReactComponent as BookmarkFilled } from "./svg/bookmarkFilled.svg";
 import { ReactComponent as BookmarkEmpty } from "./svg/bookmarkEmpty.svg";
+import AdvanceSearch from "./components/AdvanceSearch";
 
 const App = (props) => {
   const APP_ID = "6f96d73b";
@@ -24,16 +25,21 @@ const App = (props) => {
     console.log("render");
     return () => {
       dispatch('CLEAR_RECIPES')
-      dispatch('CLEAR_SEARCH')
+      //dispatch('CLEAR_SEARCH')
     }
   }, [state.search[0]]);
 
   async function getData(){
     const response = await axios.get(
-      `https://api.edamam.com/search?q=${state.search}&app_id=${APP_ID}&app_key=${APP_KEY}`
+      `https://api.edamam.com/search?q=${state.search}&app_id=${APP_ID}&app_key=${APP_KEY}&from=${state.to}`
     )
-    const data = await response.data.hits
-    dispatch('SET_RECIPES', data)
+    const data = await response.data
+    console.log(response.data)
+    dispatch('SET_RECIPES', data.hits)
+    dispatch('SET_MORE', data.more)
+    dispatch('SET_TOTAL', data.count)
+    dispatch('SET_TO', data.to)
+    dispatch('SET_FROM', data.from)
   }
 
   const toggleBookmarks = () => {
@@ -59,6 +65,7 @@ const App = (props) => {
         </a>
       </header>
       <InputForm/>
+      <AdvanceSearch/>
       {state.showBookmark ? (
         <BookmarkedCards />
       ) : (
@@ -75,6 +82,6 @@ export default App;
 2. Create a modal/componant/page for detailed recipe (DONE)
 3. Add custom search options for categories
 4. Ingredients details like carbs/sugar/sodium
-5. Add light/dark theming and if possible, add multiple themes
-6. Add css animations/transitions
+5. Add light/dark theming and, if possible, add multiple themes
+6. Add css animations/transitions ( DONE )
 */

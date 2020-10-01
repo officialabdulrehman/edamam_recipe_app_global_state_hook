@@ -3,12 +3,12 @@
   justify-content: center;
   flex-wrap: wrap;
   width: 100%;
-  margin-top: 10px;
+  /* margin-top: 10px; */
 }
 
 .card {
   border-radius: 5px;
-  margin: 10px ;
+  margin: 0 10px 20px 10px;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -103,7 +103,10 @@ span{
   and (max-device-width: 736px) 
   and (-webkit-min-device-pixel-ratio: 3) { 
   .card{
-    margin: 20px 0;
+    margin: 0 0 20px 0;
+  }
+  .cards{
+    margin-top: 0;
   }
 }
 
@@ -119,7 +122,10 @@ span{
   and (max-device-width: 812px) 
   and (-webkit-min-device-pixel-ratio: 3) { 
     .card{
-      margin: 20px 0;
+      margin: 0 0 20px 0;
+    }
+    .cards{
+      margin-top: 0;
     }
 }
 
@@ -128,6 +134,9 @@ span{
   and (max-device-width: 667px) 
   and (-webkit-min-device-pixel-ratio: 2) { 
     .card{
-      margin: 20px 0;
+      margin: 0 0 20px 0;
+    }
+    .cards{
+      margin-top: 0;
     }
 }

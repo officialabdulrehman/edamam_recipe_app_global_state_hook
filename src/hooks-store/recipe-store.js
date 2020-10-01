@@ -46,6 +46,12 @@ const configureStore = () => {
       return{ recipes: newState.recipes}
       //return newState
     },
+    SET_NEW_RECIPES: (curState, recipes) => {
+      //const newRecipes = curState.recipes
+      const newState = {...curState}
+      newState.recipes = recipes
+      return { recipes: newState.recipes }
+    },
     SET_SEARCH: (curState, search) => {
       let newSearch = curState.search
       console.log(search)
@@ -61,6 +67,7 @@ const configureStore = () => {
       let newState = {...curState}
       newState.search = []
       newState.cardDetail = null
+      newState.more = false
       return newState
     },
     CLEAR_RECIPES: (curState) => {
@@ -82,8 +89,43 @@ const configureStore = () => {
       let newState = {...curState}
       newState.cardDetail = null
       return newState
+    },
+    IS_ADVANCE_SEARCH: (curState) => {
+      let newState = {...curState}
+      newState.isAdvSearch = !curState.isAdvSearch
+      return { isAdvSearch: newState.isAdvSearch }
+    },
+    SET_MORE: (curState, inputMore) => {
+      let newState = {...curState}
+      newState.more = inputMore
+      return { more: newState.more }
+    },
+    SET_TOTAL: (curState, count) => {
+      let newState = {...curState}
+      newState.totalCount = count
+      return { totalCount: newState.totalCount }
+    },
+    SET_TO: (curState, toData) => {
+      let newState = {...curState}
+      newState.to = toData
+      return { to: newState.to}
+    },
+    SET_FROM: (curState, fromData) => {
+      let newState = {...curState}
+      newState.from = fromData
+      return { from: newState.from}
     }
   }
-  initStore(actions,  {recipes: [], search: [], showBookmark: false, cardDetail: null});
+  initStore(actions, {
+    recipes: [],
+    search: [],
+    showBookmark: false,
+    cardDetail: null,
+    isAdvSearch: false,
+    totalCount: 0,
+    more: false,
+    to: 0,
+    from: 0
+  });
 }
 export default configureStore
