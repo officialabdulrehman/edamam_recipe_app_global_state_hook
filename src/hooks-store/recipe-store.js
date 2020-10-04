@@ -24,7 +24,6 @@ const configureStore = () => {
     },
     TOGGLE_BOOKMARK: (curState, recipe) => {
       const recipeIndex = curState.recipes.findIndex(r => r.recipe.label === recipe.recipe.label)
-      //console.log(curState, ' ', recipe)
       const newBookmarkStatus = !curState.recipes[recipeIndex].bookmarked;
       const updatedRecipes = [...curState.recipes];
       updatedRecipes[recipeIndex] = {
@@ -33,7 +32,6 @@ const configureStore = () => {
       };
       const newState = {...curState}
       newState.recipes = updatedRecipes
-      //return newState
       return { recipes: newState.recipes}
     },
     SET_RECIPES: (curState, recipes) => {
@@ -42,26 +40,18 @@ const configureStore = () => {
       recipes.map(recipe => newRecipes.push(recipe))
       const newState = {...curState}
       newState.recipes = newRecipes
-      //return{newState}
       return{ recipes: newState.recipes}
-      //return newState
     },
     SET_NEW_RECIPES: (curState, recipes) => {
-      //const newRecipes = curState.recipes
       const newState = {...curState}
       newState.recipes = recipes
       return { recipes: newState.recipes }
     },
     SET_SEARCH: (curState, search) => {
-      let newSearch = curState.search
-      console.log(search)
-      newSearch.push(search)
-      //newSearch.concat(search)
-      const newState = {...curState}
-      newState.search = newSearch
-      console.log(newSearch,curState.search, newState.search ,search)
-      //return {search: curState.search}
-      return newState
+      const newState = { ...curState }
+      newState.search[0] = search
+      console.log(curState.search, newState.search ,search)
+      return { search: newState.search}
     },
     CLEAR_SEARCH: (curState) => {
       let newState = {...curState}
@@ -90,9 +80,9 @@ const configureStore = () => {
       newState.cardDetail = null
       return newState
     },
-    IS_ADVANCE_SEARCH: (curState) => {
+    IS_ADVANCE_SEARCH: (curState, value) => {
       let newState = {...curState}
-      newState.isAdvSearch = !curState.isAdvSearch
+      newState.isAdvSearch = value
       return { isAdvSearch: newState.isAdvSearch }
     },
     SET_MORE: (curState, inputMore) => {
@@ -114,6 +104,22 @@ const configureStore = () => {
       let newState = {...curState}
       newState.from = fromData
       return { from: newState.from}
+    },
+    SET_INGAMOUNT: (curState, value) => {
+      let newState = {...curState}
+      newState.ingAmount = value
+      console.log(newState.ingAmount)
+      return { ingAmount: newState.ingAmount}
+    },
+    DIET_TYPE: (curState, value) => {
+      let newState = {...curState}
+      newState.dietType = value
+      return { dietType: newState.dietType}
+    },
+    MEAL_TYPE: (curState, value) => {
+      let newState = {...curState}
+      newState.mealType = value
+      return { mealType: newState.mealType}
     }
   }
   initStore(actions, {
@@ -125,7 +131,10 @@ const configureStore = () => {
     totalCount: 0,
     more: false,
     to: 0,
-    from: 0
+    from: 0,
+    ingAmount: undefined,
+    dietType: '',
+    mealType: ''
   });
 }
 export default configureStore

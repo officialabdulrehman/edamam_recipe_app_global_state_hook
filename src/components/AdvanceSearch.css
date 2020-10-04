@@ -10,9 +10,12 @@
 .advSearch{
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
-  height: 40px;
+  /* height: 40px; */
+  /* height: 50%; */
+  width: 90%;
+  height: 150px;
 
 }
 .expand{
@@ -35,4 +38,123 @@
 .lr:hover{
   fill: coral;
   cursor: pointer;
+}
+.formDiv {
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  width: 50%;
+}
+
+.advForm{
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  /* margin-top: 10px; */
+}
+.advIngInput{
+  width: 30%;
+  height: 30px;
+  border: none;
+  /* background-color: #4f5b62; */
+  background-color: #263238;
+  color: whitesmoke;
+  text-align: center;
+  font-size: 1rem;
+  outline: none;
+  margin: 10px 0;
+}
+.radioButtons{
+  display: flex;
+  width: 60%;
+  justify-content: space-around;
+  font-size: 0.8rem;
+  margin-top: 5px;
+  
+}
+.radioInput{
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  text-align: center;
+  cursor: default;
+}
+.radioInput > input {
+  cursor: pointer;
+  width: 25px;
+  margin-top: 0;
+  /* margin-right: 5px; */
+}
+
+form > button {
+  background-color: lightcoral;
+  border: none;
+  color: white;
+  min-width: 80px;
+  width: 10%;
+  height: 32px;
+  cursor: pointer;
+  outline: none;
+}
+
+@media only screen 
+  and (min-device-width: 414px) 
+  and (max-device-width: 736px) 
+  and (-webkit-min-device-pixel-ratio: 3) { 
+    .advSearch{
+      width: 95%;
+      height: 260px;
+    }
+    .advIngInput{
+      width: 70%;    
+    }
+    .radioButtons{
+      width: 40%;
+      flex-direction: column;
+      height: 150px;
+      justify-content: space-evenly;
+    }
+}
+
+@media only screen 
+  and (min-device-width: 375px) 
+  and (max-device-width: 812px) 
+  and (-webkit-min-device-pixel-ratio: 3) { 
+    .advSearch{
+      width: 95%;
+      height: 260px;
+    }
+    .advIngInput{
+      width: 70%;    
+    }
+    .radioButtons{
+      width: 40%;
+      flex-direction: column;
+      height: 150px;
+      justify-content: space-evenly;
+    }
+}
+
+@media only screen 
+  and (min-device-width: 375px) 
+  and (max-device-width: 667px) 
+  and (-webkit-min-device-pixel-ratio: 2) { 
+    .advSearch{
+      width: 95%;
+      height: 260px;
+    }
+    .advIngInput{
+      width: 70%;    
+    }
+    .radioButtons{
+      width: 40%;
+      flex-direction: column;
+      height: 150px;
+      justify-content: space-evenly;
+    }
 }

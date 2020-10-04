@@ -14,8 +14,18 @@ import AdvanceSearch from "./components/AdvanceSearch";
 const App = (props) => {
   const APP_ID = "6f96d73b";
   const APP_KEY = "3c2c1eb0abefd19d7eee57e862a1cbf0";
-
   const [state, dispatch] = useStore()
+  let URL = `https://api.edamam.com/search?q=${state.search}&app_id=${APP_ID}&app_key=${APP_KEY}&from=${state.to}`
+  if(state.ingAmount !== undefined){
+    URL=`https://api.edamam.com/search?q=${state.search}&app_id=${APP_ID}&app_key=${APP_KEY}&from=${state.to}&ingr=${state.ingAmount}`
+  }
+  if(state.dietType !== ''){
+    URL = URL.concat(`&diet=${state.dietType}`)
+    console.log(URL)
+  }
+  if(state.mealType !== ''){
+    URL = URL.concat(`&mealType=${state.mealType}`)
+  }
 
   useEffect(() => {
     console.log(state.search[0])
@@ -31,7 +41,7 @@ const App = (props) => {
 
   async function getData(){
     const response = await axios.get(
-      `https://api.edamam.com/search?q=${state.search}&app_id=${APP_ID}&app_key=${APP_KEY}&from=${state.to}`
+      URL
     )
     const data = await response.data
     console.log(response.data)
@@ -40,6 +50,7 @@ const App = (props) => {
     dispatch('SET_TOTAL', data.count)
     dispatch('SET_TO', data.to)
     dispatch('SET_FROM', data.from)
+    dispatch("IS_ADVANCE_SEARCH", false);
   }
 
   const toggleBookmarks = () => {

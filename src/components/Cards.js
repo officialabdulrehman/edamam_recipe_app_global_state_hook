@@ -10,7 +10,7 @@ export const Cards = () => {
 
   useEffect(() => {
     console.log(state.recipes);
-  }, [state.recipes]);
+  }, [state.search]);
 
   const recipeCards = useMemo(() => {
     return (
