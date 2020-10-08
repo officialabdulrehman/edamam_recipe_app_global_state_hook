@@ -4,6 +4,7 @@ import { useStore } from "../hooks-store/store";
 import Card from "./Card";
 import CardDetail from "./CardDetail";
 import "./Card.css";
+import { AnimatePresence } from "framer-motion";
 
 export const Cards = () => {
   const state = useStore()[0];
@@ -24,7 +25,9 @@ export const Cards = () => {
   if (state.recipes[0] !== undefined) {
     display = (
       <div className="cards">
-        {recipeCards}
+        <AnimatePresence exitBeforeEnter>
+          {recipeCards}
+        </AnimatePresence>
         {/* {state.recipes.map((recipe, index) => (
           <Card recipe={recipe} index={index} key={index} />
         ))} */}

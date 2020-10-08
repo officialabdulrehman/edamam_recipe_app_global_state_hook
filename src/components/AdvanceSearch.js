@@ -7,6 +7,86 @@ import { ReactComponent as LeftIcon } from "../svg/leftIcon.svg";
 import { ReactComponent as RightIcon } from "../svg/rightIcon.svg";
 import "./AdvanceSearch.css";
 import axios from "axios";
+import { AnimatePresence, motion } from 'framer-motion';
+
+const advVariants = {
+  hidden: {
+    opacity: 0,
+    y: '-100vh'
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition:{
+      duration: 1,
+      delay: 0.3,
+      type: 'spring',
+      stiffness: 120
+    }
+  }
+}
+
+const advFormVariants = {
+  hidden: {
+    opacity: 0,
+    y: -50
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition:{
+      duration: 0.8,
+      //delay: 0.3,
+    }
+  }
+}
+
+const advCompressVariants = {
+  hidden: {
+    opacity: 0,
+    y: -100,
+    rotate: 180,
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    rotate: 0,
+    transition:{
+      duration: 0.8,
+      //delay: 0.3,
+    }
+  }
+}
+
+const left = {
+  hidden:{
+    opacity: 0,
+    x: '100vw'
+  },
+  visible:{
+    opacity: 1,
+    x: 0,
+    transition: {
+      duration: 1.5,
+      type: 'spring'
+    }
+  }
+}
+
+const right = {
+  hidden:{
+    opacity: 0,
+    x: '-100vw'
+  },
+  visible:{
+    opacity: 1,
+    x: 0,
+    transition: {
+      duration: 1.5,
+      type: 'spring'
+    }
+  }
+}
 
 const AdvanceSearch = () => {
   const [state, dispatch] = useStore();
@@ -74,17 +154,20 @@ const AdvanceSearch = () => {
     dispatch("DIET_TYPE", input);
   };
 
-  const mealTypeHandler = (event) => {
-    const input = event.target.value;
-    dispatch("MEAL_TYPE", input);
-  };
-
   let display = (
-    <div className="advButtons">
+    <motion.div className="advButtons"
+      variants={advVariants}
+      initial='hidden'
+      animate='visible'
+    >
       {state.more && (
-        <div>
+        <motion.div
+          variants={left}
+          // initial
+          // animate
+        >
           <LeftIcon className="lr" onClick={getPrevData} />
-        </div>
+        </motion.div>
       )}
       <ExpandIcon
         className="expand"
@@ -93,17 +176,30 @@ const AdvanceSearch = () => {
         }}
       />
       {state.more && (
-        <div>
+        <motion.div
+        variants={right}
+        // initial
+        // animate
+        >
           <RightIcon className="lr" onClick={getNewData} />
-        </div>
+        </motion.div>
       )}
-    </div>
+    </motion.div>
   );
   if (state.isAdvSearch) {
     display = (
-      <div className="advSearch">
+      <motion.div className="advSearch"
+        // variants={advFormVariants}
+        // initial='hidden'
+        // animate='visible'
+      >
         {/* <div className="formDiv"> */}
-        <form className="advForm">
+        <motion.form className="advForm"
+          variants={advFormVariants}
+          initial='hidden'
+          animate='visible'
+          //exit='visible'
+        >
           {/* <label>Number of ingredients: </label> */}
           <input
             type="number"
@@ -133,15 +229,6 @@ const AdvanceSearch = () => {
               />{" "}
               High Protein
             </div>
-            {/* <div className="radioInput">
-              <input
-                type="radio"
-                value="high-fiber"
-                name="diet"
-                onChange={dietTypeHandler}
-              />{" "}
-              High Fiber
-            </div> */}
             <div className="radioInput">
               <input
                 type="radio"
@@ -161,64 +248,24 @@ const AdvanceSearch = () => {
               Low Carb
             </div>
           </div>
+        </motion.form>
+        <motion.div
+        variants={advCompressVariants}
+        initial='hidden'
+        animate='visible'
+        >
 
-          {/* <div className="radioInput">
-              <input
-                type="radio"
-                value="low-sodium"
-                name="diet"
-                onChange={dietTypeHandler}
-              />{" "}
-              Low Sodium
-            </div> */}
-          {/* <div className="radioInput">
-              <input
-                type="radio"
-                value="breakfast"
-                name="meal"
-                onChange={mealTypeHandler}
-              />{" "}
-              Breakfast
-            </div>
-            <div className="radioInput">
-              <input
-                type="radio"
-                value="lunch"
-                name="meal"
-                onChange={mealTypeHandler}
-              />{" "}
-              Lunch
-            </div>
-            <div className="radioInput">
-              <input
-                type="radio"
-                value="dinner"
-                name="meal"
-                onChange={mealTypeHandler}
-              />{" "}
-              Dinner
-            </div>
-            <div className="radioInput">
-              <input
-                type="radio"
-                value="snack"
-                name="meal"
-                onChange={mealTypeHandler}
-              />{" "}
-              Snack
-            </div> */}
-        </form>
-        {/* </div> */}
         <CompressIcon
           className="compress"
           onClick={() => {
             dispatch("IS_ADVANCE_SEARCH");
           }}
         />
-      </div>
+        </motion.div>
+      </motion.div>
     );
   }
 
-  return display;
+  return display
 };
 export default AdvanceSearch;

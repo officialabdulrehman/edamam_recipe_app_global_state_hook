@@ -10,6 +10,8 @@ import InputForm from "./components/InputForm";
 import { ReactComponent as BookmarkFilled } from "./svg/bookmarkFilled.svg";
 import { ReactComponent as BookmarkEmpty } from "./svg/bookmarkEmpty.svg";
 import AdvanceSearch from "./components/AdvanceSearch";
+import Header from "./components/Header";
+import { AnimatePresence } from "framer-motion";
 
 const App = (props) => {
   const APP_ID = "6f96d73b";
@@ -53,35 +55,18 @@ const App = (props) => {
     dispatch("IS_ADVANCE_SEARCH", false);
   }
 
-  const toggleBookmarks = () => {
-    dispatch('SET_SHOWBOOKMARK', !state.showBookmark)
-    dispatch('CLEAR_CARDDETAIL')
-  };
-
   return (
     <div className="App">
-      <header>
-        <h1>Recipe</h1>
+      {/* <AnimatePresence exitBeforeEnter> */}
+        <Header/>
+        <InputForm/>
+        <AdvanceSearch/>
         {state.showBookmark ? (
-          <BookmarkFilled className="bookmark" onClick={toggleBookmarks} />
+          <BookmarkedCards />
         ) : (
-          <BookmarkEmpty className="bookmark" onClick={toggleBookmarks} />
+          <Cards />
         )}
-        <a
-          href="https://www.edamam.com/"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          edamam api
-        </a>
-      </header>
-      <InputForm/>
-      <AdvanceSearch/>
-      {state.showBookmark ? (
-        <BookmarkedCards />
-      ) : (
-        <Cards />
-      )}
+      {/* </AnimatePresence> */}
     </div>
   );
 };

@@ -5,13 +5,45 @@ import { ReactComponent as BookmarkEmpty } from "../svg/bookmarkEmpty.svg";
 import { ReactComponent as BookmarkFilled } from "../svg/bookmarkFilled.svg";
 import "./Card.css";
 
-import { motion } from "framer-motion"
+import { motion } from "framer-motion";
+
+const cardVariants = {
+  hidden: {
+    opacity: 0,
+    x: '100vw'
+  },
+  visible: {
+    opacity: 1,
+    x: 0,
+    transition: {
+      delay:0.2,
+      duration: 1,
+      type: 'spring',
+      stiffness: 120
+    }
+  },
+  exit:{
+    x: '-100vw',
+    transition: {
+      ease: 'easeInOut',
+      duration: 1
+    }
+  }
+}
 
 const Card = React.memo(({ recipe, index }) => {
   const dispatch = useStore()[1];
   useEffect(() => {}, []);
   return (
-    <motion.div className="card" key={index} initial={{ opacity: 0 }} animate={{opacity:1}} transition={{duration : 0.8}}>
+    <motion.div
+      className="card"
+      key={index}
+      variants={cardVariants}
+      initial='hidden'
+      animate='visible'
+      exit='exit'
+      staggerChildren
+    >
       {console.log("PROBLEM")}
       <div className="card_heading">
         <h1>{recipe.recipe.label}</h1>

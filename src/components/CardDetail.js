@@ -4,15 +4,42 @@ import { useStore } from '../hooks-store/store';
 import { ReactComponent as BookmarkEmpty } from "../svg/bookmarkEmpty.svg";
 import { ReactComponent as BookmarkFilled } from "../svg/bookmarkFilled.svg";
 import "./CardDetail.css";
-import { motion } from 'framer-motion'
+import { motion } from 'framer-motion';
+
+const cardsVariants = {
+  hidden: {
+    opacity: 0,
+    y: '100vh'
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      delay:0.2,
+      duration: 1,
+      type: 'spring',
+      stiffness: 120
+    }
+  },
+  exit:{
+    x: '-100vw',
+    transition: {
+      ease: 'easeInOut',
+      duration: 1
+    }
+  }
+}
 
 export default function CardDetail() {
   const [state, dispatch] = useStore()
   const cardIndex = state.recipes.findIndex(r => r.recipe.label === state.cardDetail.recipe.label)
   return (
-    <motion.div className="cardDetailOuter" initial={{ opacity: 0 }}
-    animate={{ opacity: 1 }}
-    transition={{ duration: 1 }}>
+    <motion.div
+      className="cardDetailOuter"
+      variants={cardsVariants}
+      initial='hidden'
+      animate='visible'
+    >
       <div className="cardInnerLeft orderTop">
         <div className="healthLabels">
           <h2>Health Labels: </h2>
@@ -47,7 +74,7 @@ export default function CardDetail() {
           />
         </div>
         <div className="cardDetail_foot">
-          <h4 style={{marginTop: '20px'}}>
+          <h4 style={{ marginTop: "20px" }}>
             Source:{"   "}
             <span>{state.cardDetail.recipe.source}</span>
           </h4>
@@ -96,9 +123,13 @@ export default function CardDetail() {
           <div className="bookmark">
             {console.log(state.recipes[cardIndex].bookmarked)}
             {state.recipes[cardIndex].bookmarked ? (
-              <BookmarkFilled onClick={() => dispatch('TOGGLE_BOOKMARK', state.cardDetail)}/>
+              <BookmarkFilled
+                onClick={() => dispatch("TOGGLE_BOOKMARK", state.cardDetail)}
+              />
             ) : (
-              <BookmarkEmpty onClick={() => dispatch('TOGGLE_BOOKMARK', state.cardDetail)}/>
+              <BookmarkEmpty
+                onClick={() => dispatch("TOGGLE_BOOKMARK", state.cardDetail)}
+              />
             )}
           </div>
           <p>
