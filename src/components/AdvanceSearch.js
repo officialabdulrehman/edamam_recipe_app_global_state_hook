@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 import { useStore } from "../hooks-store/store";
 import { ReactComponent as CompressIcon } from "../svg/compressIcon.svg";
@@ -35,7 +35,9 @@ const advFormVariants = {
     opacity: 1,
     y: 0,
     transition:{
-      duration: 0.8,
+      type:'spring',
+
+      // duration: 0.8,
       //delay: 0.3,
     }
   }
@@ -52,7 +54,8 @@ const advCompressVariants = {
     y: 0,
     rotate: 0,
     transition:{
-      duration: 0.8,
+      type: 'spring'
+      // duration: 0.8,
       //delay: 0.3,
     }
   }
@@ -90,14 +93,23 @@ const right = {
 
 const AdvanceSearch = () => {
   const [state, dispatch] = useStore();
+  const [newData, setNewData] = useState(false)
+  const [prevData, setPrevData] = useState(false)
   const APP_ID = "6f96d73b";
   const APP_KEY = "3c2c1eb0abefd19d7eee57e862a1cbf0";
-  // useEffect(() => {
-  //   return () => {
-  //     dispatch('CLEAR_RECIPES')
-  //     //dispatch('CLEAR_SEARCH')
-  //   }
-  // },[])
+
+  useEffect(() => {
+    if(newData){
+      getNewData()
+    }
+    if(prevData){
+      getPrevData()
+    }
+    // return () => {
+    //   dispatch('CLEAR_RECIPES')
+    //   //dispatch('CLEAR_SEARCH')
+    // }
+  },[newData, prevData])
   async function getNewData() {
     let URL = `https://api.edamam.com/search?q=${state.search}&app_id=${APP_ID}&app_key=${APP_KEY}&from=${state.to}`;
     if (state.ingAmount !== undefined) {
@@ -113,6 +125,7 @@ const AdvanceSearch = () => {
     const response = await axios.get(URL);
     const data = await response.data;
     console.log(response.data);
+    setNewData(false)
     dispatch("SET_NEW_RECIPES", data.hits);
     dispatch("SET_MORE", data.more);
     dispatch("SET_TOTAL", data.count);
@@ -136,6 +149,7 @@ const AdvanceSearch = () => {
     const response = await axios.get(URL);
     const data = await response.data;
     console.log(response.data);
+    setPrevData(false)
     dispatch("SET_NEW_RECIPES", data.hits);
     dispatch("SET_MORE", data.more);
     dispatch("SET_TOTAL", data.count);
@@ -166,7 +180,8 @@ const AdvanceSearch = () => {
           // initial
           // animate
         >
-          <LeftIcon className="lr" onClick={getPrevData} />
+          {/* <LeftIcon className="lr" onClick={getPrevData} /> */}
+          <LeftIcon className="lr" onClick={() => setPrevData(true)} />
         </motion.div>
       )}
       <ExpandIcon
@@ -181,7 +196,8 @@ const AdvanceSearch = () => {
         // initial
         // animate
         >
-          <RightIcon className="lr" onClick={getNewData} />
+          {/* <RightIcon className="lr" onClick={getNewData} /> */}
+          <RightIcon className="lr" onClick={() => setNewData(true)} />
         </motion.div>
       )}
     </motion.div>

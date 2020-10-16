@@ -42,9 +42,8 @@ const Card = React.memo(({ recipe, index }) => {
       initial='hidden'
       animate='visible'
       exit='exit'
-      staggerChildren
     >
-      {console.log("PROBLEM")}
+      {/* {console.log("PROBLEM")} */}
       <div className="card_heading">
         <h1>{recipe.recipe.label}</h1>
         <h2>

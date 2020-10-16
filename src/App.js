@@ -57,16 +57,16 @@ const App = (props) => {
 
   return (
     <div className="App">
-      {/* <AnimatePresence exitBeforeEnter> */}
         <Header/>
         <InputForm/>
         <AdvanceSearch/>
-        {state.showBookmark ? (
-          <BookmarkedCards />
-        ) : (
-          <Cards />
-        )}
-      {/* </AnimatePresence> */}
+        <AnimatePresence exitBeforeEnter>
+          {state.showBookmark ? (
+            <BookmarkedCards />
+          ) : (
+            <Cards />
+          )}
+        </AnimatePresence>
     </div>
   );
 };
